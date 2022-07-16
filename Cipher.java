@@ -1,32 +1,30 @@
-import java.lang.Math;
+
 class Cipher{
 
-	static String [] alpha  = "A, B, C, D, E, F, G, H, I, K, L, M, N, O, P, Q, R, S, T, V, X, Y, Z".toLowerCase().split(",");
+	static String[] alpha  = "A, B, C, D, E, F, G, H, I, K, L, M, N, O, P, Q, R, S, T, V, X, Y, Z".split(",");
+	static int M = alpha.length;
 
 	public static void main(String args []){
-		System.out.println(decipher("DWWDFN CHUJ DW GDZQ",3));
+		System.out.println(cipher("Attack zerg at dawn",3));
 	}
 
-	public static String  decipher(String msg, int k){
+	public static String cipher(String text, int k){
+
+		String msg = text.toLowerCase();
 
 		String toReturn = "";
 
 		for(int i=0;i<msg.length();i++){
-
-			if(msg.charAt(i)==(' ')){
-				toReturn += " ";
-			}
-			else{
-
-				int d = msg.charAt(i) -k;
-
-				if(d<0){  toReturn += alpha[alpha.length-1-Math.abs(d)];
+			
+			for(int j=0;j<M;j++){
+			
+				if(msg.charAt(i)==(' ')){
+					toReturn += " ";
 				}
-
-				else { toReturn += alpha[d];
-	
+				else if(msg.substring(i,i+1)==alpha[j].toLowerCase()) {
+				
+					toReturn+=alpha[(j+k)%M];
 				}
-
 			}
 
 	
